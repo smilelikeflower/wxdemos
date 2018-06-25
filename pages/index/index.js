@@ -2,7 +2,7 @@
 //获取应用实例
 const app = getApp()
 
-Page({
+Page({   
   data: {
     motto: 'Hello World',
     userInfo: {},

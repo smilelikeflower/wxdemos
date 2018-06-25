@@ -1,0 +1,32 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "小程序",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "index",
+      "iconPath": "",
+      "selectedIconPath": ""
+    },  
+    {
+      "pagePath": "pages/logs/logs",
+      "text": "logs",
+      "iconPath": "",
+      "selectedIconPath": ""
+    }],
+    "color":"#333",
+    "selectedColor":"#00b26a"
+
+  },
+  "debug":true
+}

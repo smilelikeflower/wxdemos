@@ -12,5 +12,8 @@
   </view>
 </view>
 <view>
- <image src='./'></image>
+
+<input type='text' />
 </view>
+
+<!-- add 1 -->

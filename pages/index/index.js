@@ -1,8 +1,9 @@
 //index.js
 //获取应用实例
 const app = getApp()
+// console.log('app=====',app);
 
-Page({   
+Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
@@ -11,9 +12,15 @@ Page({
   },
   //事件处理函数
   bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    console.log(666);
+    // wx.navigateTo({
+    //   url: '../logs/logs'
+    // })
+    wx.switchTab({
+      url:'../logs/logs',
+    });
+    console.log(777);
+    
   },
   onLoad: function () {
     if (app.globalData.userInfo) {

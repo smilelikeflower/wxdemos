@@ -3,7 +3,9 @@ App({
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
+    // console.log('logs=====', logs);
     logs.unshift(Date.now())
+
     wx.setStorageSync('logs', logs)
 
     // 登录
@@ -35,5 +37,19 @@ App({
   },
   globalData: {
     userInfo: null
+  },
+  onShow:function(){
+
+  },
+  onHide:function(){
+
+  },
+  onError:function(){
+
+  },
+  onPageNotFound:function(){
+
   }
+
+
 })

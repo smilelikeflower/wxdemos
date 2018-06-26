@@ -13,7 +13,115 @@
 </view>
 <view>
 
-<input type='text' />
+  <view style="margin-right:10px;" wx:for="{{fruits}}" wx:key="{{index}}">
+    <text>{{item}}</text>
+    <text wx:if="{{item == 'pear'}}">梨果</text>
+    <text wx:elif="{{item == 'apple'}}">苹果</text>
+    <text wx:else="{{item != 'pear'}}">这不是梨果</text>
+  </view>
+  <view>
+    <!--模板-->
+    <template name="student">
+      <view>
+      {{className}}的{{name}}同学，
+      </view>
+    </template>
+    <view>
+      <text>获得本学习三好学生的同学有：</text>
+      <template is="student" data="{{...studentA}}"></template>
+      <template is="student" data="{{...studentB}}"></template>
+    </view>
+
+    <template name="staffName">
+      <view>
+        FirstName: {{firstName}}, LastName: {{lastName}}
+      </view>
+    </template>
+    <template is="staffName" data="{{...staffA}}"></template>
+    <template is="staffName" data="{{...staffB}}"></template>
+    <template is="staffName" data="{{...staffC}}"></template>
+  </view>
+  <!-- 事件 -->
+  <view class="countView">
+    <text>{{count}}</text>
+    <text class="countbtn" bindtap='add'>点击我+1</text>
+    <!-- <text class="countbtn" bindtap='{{count = 0}}'>点击我重置</text> -->
+  </view>
+  <!-- 数据绑定 -->
+  <view>
+   <checkbox checked='{{dataBind.checkFlag}}'></checkbox>
+   <view hidden='{{dataBind.flag ? true : false}}'>我现在是显示的</view>
+   <view>{{dataBind.a + dataBind.b}}+{{dataBind.c}}+d</view>
+   <!-- 条件渲染 -->
+   <view wx:if="{{dataBind.length > 5}}">现在是大于5的数:{{dataBind.length}}</view>
+   <block wx:if="{{dataBind.length > 5}}">
+    <view>现在是大于5的数</view>
+    <view>{{dataBind.length}}</view>
+   </block>
+   <view hidden="{{dataBind.length < 5}}">
+    现在不是小于5的，不隐藏
+   </view>
+<!-- 一般来说，wx:if 有更高的切换消耗而 hidden 有更高的初始渲染消耗。因此，如果需要频繁切换的情景下，用 hidden 更好，如果在运行时条件不大可能改变则 wx:if 较好。 -->
+
+   <view>{{"hello "+dataBind.name}}</view>
+   <view>{{dataBind.array[1]}}</view>
+   <view wx:for="{{[dataBind.zero,1,2,3]}}" wx:key="{{index}}">{{item}}</view> 
+   <view wx:for="{{[1,2,3]}} " wx:key="{{index}}">tiem: {{item}}</view>
+   <!-- 模板 -->
+   <template name="objectCombine">
+    <!-- <text>{for:{{for}}, bar:{{bar}}}</text> -->
+    <view>{x:{{x}}, y:{{y}}, w:{{w}}, z:{{z}}, e:{{e}}}</view>
+   </template>
+   <!-- <template is="objectCombine" data="{{for: dataBind.x, bar: dataBind.y}}"></template> -->
+   <template is="objectCombine" data="{{...dataBind.obj1, ...dataBind.obj2, e: 5}}"></template>
+   <template is="objectCombine" data="{{...dataBind.obj1, ...dataBind.obj2, x: 'X1', y: 'Y1', e: 6}}"></template>
+   <template name="even">
+    <view>even</view>
+   </template>
+   <template name="odd">
+    <view>odd</view>
+   </template>
+   <block wx:for="{{[1, 2, 3, 4]}}" wx:key="unique">
+    <template is="{{item % 2 == 0 ? 'even':'odd'}}"></template>
+   </block>
+  </view>
+
+  <!-- 列表渲染 -->
+  <view>
+    <view wx:for="{{listRender.array}}" wx:key="{{index}}">
+      {{index}}: {{item.message}}
+    </view>
+    <view wx:for="{{listRender.array}}" wx:key="{{index}}" wx:for-index="i" wx:for-item="it">
+      {{i}}: {{it.message}}
+    </view>
+    <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:key="{{index}}" wx:for-item="i">
+      <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:key="{{index}}" wx:for-item="j">
+        <view wx:if="{{i <= j}}">
+          {{i}} * {{j}} = {{i * j}}
+        </view>
+      </view>
+    </view>
+    <block wx:for="{{[1, 2, 3]}}" wx:key="unique">
+      <view>{{index}}:</view>
+      <view>{{item}}</view>
+    </block>
+    <view wx:for="array" wx:key="unique">
+      array-item:{{item}}
+    </view>
+    <view wx:for="{{[1, 2, 3]}} " wx:key="unique">
+      item:{{item}}
+    </view>
+    <!-- wx:key -->
+    <view>
+      <switch wx:for="{{objectArray}}" wx:key="unique" style="display: block;"> {{item.id}} </switch>
+      <button bindtap="switch"> Switch </button>
+      <button bindtap="addToFront"> Add to the front </button>
+
+      <switch wx:for="{{numberArray}}" wx:key="*this" style="display: block;"> {{item}} </switch>
+      <button bindtap="addNumberToFront"> Add to the front </button>
+    </view>
+  </view>
 </view>
+
 
 <!-- add 1 -->

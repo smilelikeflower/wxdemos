@@ -12,6 +12,50 @@
   </view>
 </view>
 <view>
+  <!-- 组件 -->
+  <view>
+    <view class="section">
+      <view class="section__title">flex-direction: row</view>
+      <view class="flex-wrp" style="flex-direction:row;" hover-class="hover-active-bg">
+        <view class="flex-item bc_green" hover-class="hover-active" hover-stop-propagation="true" hover-start-time="50" hover-stay-time="400">1</view>
+        <view class="flex-item bc_red">2</view>
+        <view class="flex-item bc_blue">3</view>
+      </view>
+    </view>
+    <view class="section">
+      <view class="section__title">flex-direction: column</view>
+      <view class="flex-wrp" style="height: 300px;flex-direction:column;">
+        <view class="flex-item bc_green">1</view>
+        <view class="flex-item bc_red">2</view>
+        <view class="flex-item bc_blue">3</view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section__title">vertical scroll</view>
+      <scroll-view id="scroll-view1" scroll-y style="height: 200px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{component.toView}}" scroll-top="{{component.scrollTop}}">
+        <view id="green" class="scroll-view-item bc_green"></view>
+        <view id="red" class="scroll-view-item bc_red"></view>
+        <view id="yellow" class="scroll-view-item bc_yellow"></view>
+        <view id="blue" class="scroll-view-item bc_blue"></view>
+      </scroll-view>
+
+      <view class="btn-area">
+        <button size="mini" bindtap="tap">click me to scroll into view </button>
+        <button size="mini" bindtap="tapMove">click me to scroll</button>
+      </view>
+    </view>
+    <view class="section section_gap">
+      <view class="section__title">horizontal scroll</view>
+      <scroll-view class="scroll-view_H" scroll-x style="width: 100%">
+        <view id="green" class="scroll-view-item_H bc_green"></view>
+        <view id="red" class="scroll-view-item_H bc_red"></view>
+        <view id="yellow" class="scroll-view-item_H bc_yellow"></view>
+        <view id="blue" class="scroll-view-item_H bc_blue"></view>
+      </scroll-view>
+    </view>
+
+  </view>
 
   <view style="margin-right:10px;" wx:for="{{fruits}}" wx:key="{{index}}">
     <text>{{item}}</text>
@@ -23,7 +67,7 @@
     <!--模板-->
     <template name="student">
       <view>
-      {{className}}的{{name}}同学，
+        {{className}}的{{name}}同学，
       </view>
     </template>
     <view>
@@ -44,46 +88,46 @@
   <!-- 事件 -->
   <view class="countView">
     <text>{{count}}</text>
-    <text class="countbtn" bindtap='add'>点击我+1</text>
+    <text id="countbtn" class="countbtn" data-active="true" bindtap='add'>点击我+1</text>
     <!-- <text class="countbtn" bindtap='{{count = 0}}'>点击我重置</text> -->
   </view>
   <!-- 数据绑定 -->
   <view>
-   <checkbox checked='{{dataBind.checkFlag}}'></checkbox>
-   <view hidden='{{dataBind.flag ? true : false}}'>我现在是显示的</view>
-   <view>{{dataBind.a + dataBind.b}}+{{dataBind.c}}+d</view>
-   <!-- 条件渲染 -->
-   <view wx:if="{{dataBind.length > 5}}">现在是大于5的数:{{dataBind.length}}</view>
-   <block wx:if="{{dataBind.length > 5}}">
-    <view>现在是大于5的数</view>
-    <view>{{dataBind.length}}</view>
-   </block>
-   <view hidden="{{dataBind.length < 5}}">
-    现在不是小于5的，不隐藏
-   </view>
-<!-- 一般来说，wx:if 有更高的切换消耗而 hidden 有更高的初始渲染消耗。因此，如果需要频繁切换的情景下，用 hidden 更好，如果在运行时条件不大可能改变则 wx:if 较好。 -->
+    <checkbox checked='{{dataBind.checkFlag}}'></checkbox>
+    <view hidden='{{dataBind.flag ? true : false}}'>我现在是显示的</view>
+    <view>{{dataBind.a + dataBind.b}}+{{dataBind.c}}+d</view>
+    <!-- 条件渲染 -->
+    <view wx:if="{{dataBind.length > 5}}">现在是大于5的数:{{dataBind.length}}</view>
+    <block wx:if="{{dataBind.length > 5}}">
+      <view>现在是大于5的数</view>
+      <view>{{dataBind.length}}</view>
+    </block>
+    <view hidden="{{dataBind.length < 5}}">
+      现在不是小于5的，不隐藏
+    </view>
+    <!-- 一般来说，wx:if 有更高的切换消耗而 hidden 有更高的初始渲染消耗。因此，如果需要频繁切换的情景下，用 hidden 更好，如果在运行时条件不大可能改变则 wx:if 较好。 -->
 
-   <view>{{"hello "+dataBind.name}}</view>
-   <view>{{dataBind.array[1]}}</view>
-   <view wx:for="{{[dataBind.zero,1,2,3]}}" wx:key="{{index}}">{{item}}</view> 
-   <view wx:for="{{[1,2,3]}} " wx:key="{{index}}">tiem: {{item}}</view>
-   <!-- 模板 -->
-   <template name="objectCombine">
-    <!-- <text>{for:{{for}}, bar:{{bar}}}</text> -->
-    <view>{x:{{x}}, y:{{y}}, w:{{w}}, z:{{z}}, e:{{e}}}</view>
-   </template>
-   <!-- <template is="objectCombine" data="{{for: dataBind.x, bar: dataBind.y}}"></template> -->
-   <template is="objectCombine" data="{{...dataBind.obj1, ...dataBind.obj2, e: 5}}"></template>
-   <template is="objectCombine" data="{{...dataBind.obj1, ...dataBind.obj2, x: 'X1', y: 'Y1', e: 6}}"></template>
-   <template name="even">
-    <view>even</view>
-   </template>
-   <template name="odd">
-    <view>odd</view>
-   </template>
-   <block wx:for="{{[1, 2, 3, 4]}}" wx:key="unique">
-    <template is="{{item % 2 == 0 ? 'even':'odd'}}"></template>
-   </block>
+    <view>{{"hello "+dataBind.name}}</view>
+    <view>{{dataBind.array[1]}}</view>
+    <view wx:for="{{[dataBind.zero,1,2,3]}}" wx:key="{{index}}">{{item}}</view>
+    <view wx:for="{{[1,2,3]}} " wx:key="{{index}}">tiem: {{item}}</view>
+    <!-- 模板 -->
+    <template name="objectCombine">
+      <!-- <text>{for:{{for}}, bar:{{bar}}}</text> -->
+      <view>{x:{{x}}, y:{{y}}, w:{{w}}, z:{{z}}, e:{{e}}}</view>
+    </template>
+    <!-- <template is="objectCombine" data="{{for: dataBind.x, bar: dataBind.y}}"></template> -->
+    <template is="objectCombine" data="{{...dataBind.obj1, ...dataBind.obj2, e: 5}}"></template>
+    <template is="objectCombine" data="{{...dataBind.obj1, ...dataBind.obj2, x: 'X1', y: 'Y1', e: 6}}"></template>
+    <template name="even">
+      <view>even</view>
+    </template>
+    <template name="odd">
+      <view>odd</view>
+    </template>
+    <block wx:for="{{[1, 2, 3, 4]}}" wx:key="unique">
+      <template is="{{item % 2 == 0 ? 'even':'odd'}}"></template>
+    </block>
   </view>
 
   <!-- 列表渲染 -->

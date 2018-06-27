@@ -53,10 +53,37 @@ Page({
       { id: 1, unique: 'unique_1' },
       { id: 0, unique: 'unique_0' },
     ],
+    component: {
+      toView:'blue',
+      scrollTop: 50,
+    },
     numberArray: [1, 2, 3, 4],
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
+  },
+  upper: function(e){
+    console.log('upper',e);
+  },
+  lower: function(e){
+    console.log('lower',e)
+  }, 
+  tap: function (e) {
+    var order = ['red','yellow','blue','green']
+    console.log(order[2]);
+    for (var i = 0; i < order.length; ++i) {
+      if (order[i] === this.data.toView) {
+        this.setData({
+          'component.toView': order[i + 1]
+        })
+        break
+      }
+    }
+  },
+  tapMove: function (e) {
+    this.setData({
+      'component.scrollTop': this.data.component.scrollTop + 10
+    })
   },
   switch: function(){
     const length = this.data.objectArray.length
@@ -95,7 +122,8 @@ Page({
       numberArray: this.data.numberArray
     })
   },
-  add: function(){
+  add: function(event){
+    console.log(event);
     this.setData({
       count:this.data.count+1
     })

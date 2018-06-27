@@ -33,3 +33,29 @@
   margin: 0 10px;
   border-radius: 5px;
 }
+.hover-active{color: #fff;}
+.hover-active-bg{background: #000;}
+.flex-wrp{
+  display: flex;
+}
+.flex-item{
+  height:100px;width: 100px;text-align: center;line-height: 100px;
+}
+.bc_green{
+  background: green;
+}
+.bc_red{
+  background: red;
+}
+.bc_blue{
+  background: blue;
+}
+.bc_yellow{
+  background: yellow;
+}
+.scroll-view_H{
+  height: 100px;
+}
+.scroll-view-item,.scroll-view-item_H{
+  height: 100px;width: 100%；
+}
